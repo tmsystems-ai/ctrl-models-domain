@@ -222,3 +222,11 @@ type SystemSetting struct {
 func (SystemSetting) TableName() string {
 	return "system_settings"
 }
+
+type AuthToken struct {
+	Id        uint      `gorm:"primaryKey" json:"id"`
+	UserId    uint      `json:"user_id"`
+	Token     string    `json:"token"`
+	ExpiresAt time.Time `gorm:"precision:1" json:"expires_at"`
+	CreatedAt time.Time `gorm:"precision:1" json:"created_at"`
+}
