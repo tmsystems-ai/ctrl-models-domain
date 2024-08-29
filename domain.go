@@ -66,12 +66,12 @@ type Email struct {
 	Body                  string            `json:"body" gorm:"type:text"`
 	To                    string            `json:"to" gorm:"size:255"`
 	From                  string            `json:"from" gorm:"size:255"`
-	URI                   string            `json:"uri" gorm:"size:255"`
+	URI                   string            `json:"uri" gorm:"size:550"`
 	EmailAttachments      []EmailAttachment `json:"email_attachments" gorm:"foreignKey:EmailId;references:Id"`
 	EmailThreadId         uint              `json:"email_thread_id" gorm:"index"`
 	EmailThread           EmailThread       `json:"email_thread"`
 	ReceivedDate          time.Time         `json:"received_date"`
-	MailProviderMessageId string            `json:"mail_provider_message_id" gorm:"size:255"`
+	MailProviderMessageId string            `json:"mail_provider_message_id" gorm:"size:550;index"`
 	IsDeleted             bool              `json:"is_deleted" gorm:"default:false"`
 	DeletedDate           *time.Time        `json:"deleted_date,omitempty" gorm:"default:null"`
 }
@@ -92,8 +92,8 @@ type EmailThread struct {
 	SharedInboxGroupId  uint             `json:"shared_inbox_group_id"`
 	SharedInboxGroup    SharedInboxGroup `json:"shared_inbox_group" gorm:"foreignKey:SharedInboxGroupId;references:Id"`
 	ReceivedDate        time.Time        `json:"received_date"`
-	ProviderThreadId    string           `json:"provider_thread_id" gorm:"size:255"`
-	ProviderThreadTopic string           `json:"provider_thread_topic" gorm:"size:255"`
+	ProviderThreadId    string           `json:"provider_thread_id" gorm:"size:550;index"`
+	ProviderThreadTopic string           `json:"provider_thread_topic" gorm:"size:550"`
 }
 
 type EmailAttachment struct {
