@@ -63,7 +63,7 @@ type Ticket struct {
 type Email struct {
 	Id                    uint              `json:"id" gorm:"primaryKey"`
 	SubjectLine           string            `json:"subject_line" gorm:"size:255"`
-	Body                  string            `json:"body" gorm:"type:text"`
+	Body                  string            `json:"body" gorm:"type:mediumtext"`
 	To                    string            `json:"to" gorm:"size:255"`
 	From                  string            `json:"from" gorm:"size:255"`
 	URI                   string            `json:"uri" gorm:"size:550"`
