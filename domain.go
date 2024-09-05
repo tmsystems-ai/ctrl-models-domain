@@ -74,6 +74,8 @@ type Email struct {
 	MailProviderMessageId string            `json:"mail_provider_message_id" gorm:"size:550;index"`
 	IsDeleted             bool              `json:"is_deleted" gorm:"default:false"`
 	DeletedDate           *time.Time        `json:"deleted_date,omitempty" gorm:"default:null"`
+	AttachmentsProcessed  bool              `json:"attachments_processed" gorm:"default:false"`
+	GCSFolder             string            `json:"gcs_folder" gorm:"size:550"`
 }
 
 type EmailTemplate struct {
