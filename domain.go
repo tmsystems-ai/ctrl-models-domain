@@ -75,6 +75,7 @@ type Email struct {
 	IsDeleted             bool              `json:"is_deleted" gorm:"default:false"`
 	DeletedDate           *time.Time        `json:"deleted_date,omitempty" gorm:"default:null"`
 	AttachmentsProcessed  bool              `json:"attachments_processed" gorm:"default:false"`
+	AttachmentsProcessing bool              `json:"attachments_processing" gorm:"default:false"`
 	GCSFolder             string            `json:"gcs_folder" gorm:"size:550"`
 }
 
