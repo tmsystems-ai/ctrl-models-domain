@@ -66,7 +66,7 @@ type Email struct {
 	Body                  string            `json:"body" gorm:"type:mediumtext"`
 	To                    string            `json:"to" gorm:"type:text"`
 	From                  string            `json:"from" gorm:"type:text"`
-	URI                   string            `json:"uri" gorm:"size:550"`
+	URI                   string            `json:"uri" gorm:"size:2048"`
 	EmailAttachments      []EmailAttachment `json:"email_attachments" gorm:"foreignKey:EmailId;references:Id"`
 	EmailThreadId         uint              `json:"email_thread_id" gorm:"index"`
 	EmailThread           EmailThread       `json:"email_thread"`
@@ -77,6 +77,7 @@ type Email struct {
 	AttachmentsProcessed  bool              `json:"attachments_processed" gorm:"default:false"`
 	AttachmentsProcessing bool              `json:"attachments_processing" gorm:"default:false"`
 	GCSFolder             string            `json:"gcs_folder" gorm:"size:550"`
+	EmailDownloadFailed   bool              `json:"email_download_failed" gorm:"default:false"`
 }
 
 type EmailTemplate struct {
@@ -101,7 +102,7 @@ type EmailThread struct {
 
 type EmailAttachment struct {
 	Id          uint   `json:"id" gorm:"primaryKey"`
-	URI         string `json:"uri" gorm:"size:1024"`
+	URI         string `json:"uri" gorm:"size:2048"`
 	EmailId     uint   `json:"email_id"`
 	Filename    string `json:"filename" gorm:"size:512"`
 	ContentType string `json:"content_type" gorm:"size:255"`
@@ -117,12 +118,12 @@ type EmailTemplateField struct {
 type MailProvider struct {
 	Id                  uint   `json:"id" gorm:"primaryKey"`
 	Name                string `json:"name" gorm:"size:255"`
-	GetURI              string `json:"get_uri" gorm:"size:255"`
-	SendURI             string `json:"send_uri" gorm:"size:255"`
-	SynchronizeURI      string `json:"synchronize_uri" gorm:"size:255"`
-	MoveURI             string `json:"move_uri" gorm:"size:255"`
-	GetAttachmentURI    string `json:"get_attachment_uri" gorm:"size:255"`
-	CreateAttachmentURI string `json:"create_attachment_uri" gorm:"size:255"`
+	GetURI              string `json:"get_uri" gorm:"size:2048"`
+	SendURI             string `json:"send_uri" gorm:"size:2048"`
+	SynchronizeURI      string `json:"synchronize_uri" gorm:"size:2048"`
+	MoveURI             string `json:"move_uri" gorm:"size:2048"`
+	GetAttachmentURI    string `json:"get_attachment_uri" gorm:"size:2048"`
+	CreateAttachmentURI string `json:"create_attachment_uri" gorm:"size:2048"`
 }
 
 type MailProviderCredential struct {
@@ -130,7 +131,7 @@ type MailProviderCredential struct {
 	TenantId     string `json:"tenant_id" gorm:"size:255"`
 	ClientId     string `json:"client_id" gorm:"size:255"`
 	ClientSecret string `json:"client_secret" gorm:"size:255"`
-	RedirectURI  string `json:"redirect_uri" gorm:"size:255"`
+	RedirectURI  string `json:"redirect_uri" gorm:"size:2048"`
 	AccessToken  string `json:"access_token" gorm:"size:5200"`
 	TokenExpiry  *int64 `json:"token_expiry"`
 }
@@ -176,7 +177,7 @@ type User struct {
 	PhoneNumber          string              `json:"phone_number" gorm:"size:255"`
 	Tickets              []Ticket            `json:"tickets" gorm:"foreignKey:AssignedToId;references:Id"`
 	SigUserAllocations   []SigUserAllocation `json:"sig_user_allocations" gorm:"foreignKey:UserId;references:Id"`
-	ProfilePictureURI    string              `json:"profile_picture_uri" gorm:"size:255"`
+	ProfilePictureURI    string              `json:"profile_picture_uri" gorm:"size:2048"`
 	Country              string              `json:"country" gorm:"size:255"`
 	RequirePasswordReset bool                `json:"require_password_reset"`
 }
