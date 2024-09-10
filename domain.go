@@ -101,7 +101,7 @@ type EmailThread struct {
 
 type EmailAttachment struct {
 	Id          uint   `json:"id" gorm:"primaryKey"`
-	URI         string `json:"uri" gorm:"size:512"`
+	URI         string `json:"uri" gorm:"size:1024"`
 	EmailId     uint   `json:"email_id"`
 	Filename    string `json:"filename" gorm:"size:512"`
 	ContentType string `json:"content_type" gorm:"size:255"`
