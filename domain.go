@@ -72,6 +72,7 @@ type Email struct {
 	EmailThread           EmailThread       `json:"email_thread"`
 	ReceivedDate          time.Time         `json:"received_date"`
 	MailProviderMessageId string            `json:"mail_provider_message_id" gorm:"size:550;index"`
+	SadHash               string            `json:"sad_hash" gorm:"size:64;index"`
 	IsDeleted             bool              `json:"is_deleted" gorm:"default:false"`
 	DeletedDate           *time.Time        `json:"deleted_date,omitempty" gorm:"default:null"`
 	AttachmentsProcessed  bool              `json:"attachments_processed" gorm:"default:false"`
