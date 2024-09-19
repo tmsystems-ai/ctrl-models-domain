@@ -1,6 +1,10 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/datatypes"
+)
 
 type Role struct {
 	Id                    uint                   `json:"id" gorm:"primaryKey"`
@@ -58,6 +62,51 @@ type Ticket struct {
 	CompletedDate   *time.Time    `json:"completed_date,omitempty"`
 	CustomerId      *uint         `json:"customer_id"`
 	Customer        Customer      `json:"customer" gorm:"foreignKey:CustomerId;references:Id"`
+}
+
+type ArchivedTicket struct {
+	ID                             uint64         `json:"id" gorm:"primaryKey"`
+	CreatedDate                    time.Time      `json:"created_date"`
+	ReceivedDate                   time.Time      `json:"received_date"`
+	EmailThreadID                  uint64         `json:"email_thread_id"`
+	EmailThreadSubject             string         `json:"email_thread_subject"`
+	EmailThreadReceivedFrom        string         `json:"email_thread_received_from"`
+	EmailThreadProviderThreadID    string         `json:"email_thread_provider_thread_id"`
+	EmailThreadProviderThreadTopic string         `json:"email_thread_provider_thread_topic"`
+	CreatedByID                    *uint64        `json:"created_by_id"`
+	TicketStatusID                 uint64         `json:"ticket_status_id"`
+	AssignedToID                   *uint64        `json:"assigned_to_id"`
+	PriorityLevelID                uint64         `json:"priority_level_id"`
+	CompletedDate                  *time.Time     `json:"completed_date"`
+	CustomerID                     *uint64        `json:"customer_id"`
+	ArchivedDate                   time.Time      `json:"archived_date"`
+	Emails                         datatypes.JSON `json:"emails"`
+	EmailAttachments               datatypes.JSON `json:"email_attachments"`
+	SharedInboxGroupID             uint64         `json:"shared_inbox_group_id"`
+	InboxGroupName                 string         `json:"inbox_group_name"`
+	MailboxEmailAddress            string         `json:"mailbox_email_address"`
+}
+
+type ArchivedEmail struct {
+	ID                    uint64                    `json:"id" gorm:"primaryKey"`
+	SubjectLine           string                    `json:"subject_line"`
+	Body                  string                    `json:"body"`
+	To                    string                    `json:"to"`
+	From                  string                    `json:"from"`
+	URI                   string                    `json:"uri"`
+	ReceivedDate          time.Time                 `json:"received_date"`
+	MailProviderMessageID string                    `json:"mail_provider_message_id"`
+	Attachments           []ArchivedEmailAttachment `json:"attachments" gorm:"foreignKey:EmailID"`
+	GCSFolder             string                    `json:"gcs_folder"`
+}
+
+type ArchivedEmailAttachment struct {
+	ID          uint64 `json:"id" gorm:"primaryKey"`
+	EmailID     uint64 `json:"email_id" gorm:"index"`
+	URI         string `json:"uri"`
+	Filename    string `json:"filename"`
+	ContentType string `json:"content_type"`
+	Inline      bool   `json:"inline"`
 }
 
 type Email struct {
