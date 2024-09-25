@@ -231,6 +231,15 @@ type User struct {
 	ProfilePictureURI    string              `json:"profile_picture_uri" gorm:"size:2048"`
 	Country              string              `json:"country" gorm:"size:255"`
 	RequirePasswordReset bool                `json:"require_password_reset"`
+	UserPreferences      []UserPreference    `json:"user_preferences" gorm:"foreignKey:UserId;references:Id"`
+}
+
+type UserPreference struct {
+	Id     uint   `json:"id" gorm:"primaryKey"`
+	UserId *uint  `json:"user_id" gorm:"index"`
+	Type   string `json:"type" gorm:"size:255;index"`
+	Value  string `json:"value" gorm:"size:255"`
+	Key    string `json:"key" gorm:"size:255;index"`
 }
 
 type TicketStatus struct {
