@@ -99,6 +99,17 @@ type ArchivedEmail struct {
 	Attachments           []ArchivedEmailAttachment `json:"attachments" gorm:"foreignKey:EmailID"`
 	GCSFolder             string                    `json:"gcs_folder"`
 }
+type ArchivedEmailThread struct {
+	ID                  uint      `gorm:"column:id;primaryKey;autoIncrement"`
+	ReceivedFrom        string    `gorm:"column:received_from;type:varchar(255)"`
+	SubjectLine         string    `gorm:"column:subject_line;type:varchar(255)"`
+	SharedInboxGroupID  uint      `gorm:"column:shared_inbox_group_id"`
+	ReceivedDate        time.Time `gorm:"column:received_date"`
+	ProviderThreadID    string    `gorm:"column:provider_thread_id;type:varchar(550)"`
+	ProviderThreadTopic string    `gorm:"column:provider_thread_topic;type:varchar(550)"`
+	OriginalID          uint      `gorm:"column:original_id"`
+	ArchivedDate        time.Time `gorm:"column:archived_date;default:CURRENT_TIMESTAMP"`
+}
 
 type ArchivedEmailAttachment struct {
 	ID          uint64 `json:"id" gorm:"primaryKey"`
