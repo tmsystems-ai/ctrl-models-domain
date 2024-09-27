@@ -66,6 +66,7 @@ type Ticket struct {
 
 type ArchivedTicket struct {
 	ID                             uint64         `json:"id" gorm:"primaryKey"`
+	OriginalID                     uint64         `json:"original_id"`
 	CreatedDate                    time.Time      `json:"created_date"`
 	ReceivedDate                   time.Time      `json:"received_date"`
 	EmailThreadID                  uint64         `json:"email_thread_id"`
