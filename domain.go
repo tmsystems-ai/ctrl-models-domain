@@ -118,7 +118,7 @@ type ArchivedEmailThread struct {
 	ProviderThreadID    string    `gorm:"column:provider_thread_id;type:varchar(550)"`
 	ProviderThreadTopic string    `gorm:"column:provider_thread_topic;type:varchar(550)"`
 	OriginalID          uint      `gorm:"column:original_id"`
-	ArchivedDate        time.Time `gorm:"column:archived_date;default:CURRENT_TIMESTAMP"`
+	ArchivedDate        time.Time `gorm:"column:archived_date;default:CURRENT_TIMESTAMP(3)"`
 }
 type Email struct {
 	Id                    uint              `json:"id" gorm:"primaryKey"`
