@@ -297,6 +297,13 @@ type SystemSetting struct {
 func (SystemSetting) TableName() string {
 	return "system_settings"
 }
+func (ArchivedEmail) TableName() string {
+	return "archived_email"
+}
+
+func (ArchivedEmailThread) TableName() string {
+	return "archived_email_thread"
+}
 
 type AuthToken struct {
 	Id        uint      `gorm:"primaryKey" json:"id"`
