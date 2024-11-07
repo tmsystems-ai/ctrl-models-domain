@@ -140,6 +140,7 @@ type Email struct {
 	GCSFolder             string            `json:"gcs_folder" gorm:"size:550"`
 	EmailDownloadFailed   bool              `json:"email_download_failed" gorm:"default:false"`
 	RetryCounter          int               `json:"retry_counter" gorm:"default:0"`
+	DeletedFromM365       bool              `json:"deleted_from_m365" gorm:"default:false"`
 }
 
 type EmailTemplate struct {
