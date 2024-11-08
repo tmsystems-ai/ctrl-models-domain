@@ -141,6 +141,7 @@ type Email struct {
 	EmailDownloadFailed   bool              `json:"email_download_failed" gorm:"default:false"`
 	RetryCounter          int               `json:"retry_counter" gorm:"default:0"`
 	DeletedFromM365       bool              `json:"deleted_from_m365" gorm:"default:false"`
+	DeletedFromM365Date   *time.Time        `json:"deleted_from_m365_date" gorm:"default:null"`
 }
 
 type EmailTemplate struct {
