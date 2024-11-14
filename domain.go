@@ -62,6 +62,19 @@ type Ticket struct {
 	CompletedDate   *time.Time    `json:"completed_date,omitempty"`
 	CustomerId      *uint         `json:"customer_id"`
 	Customer        Customer      `json:"customer" gorm:"foreignKey:CustomerId;references:Id"`
+	TicketGroupId   *uint         `json:"ticket_group_id" gorm:"index"`
+	TicketGroup     *TicketGroup  `json:"ticket_group" gorm:"foreignKey:TicketGroupId;references:Id"`
+}
+
+type TicketGroup struct {
+	Id                 uint             `json:"id" gorm:"primaryKey"`
+	Name               string           `json:"name" gorm:"size:255"`
+	SharedInboxGroupId uint             `json:"shared_inbox_group_id" gorm:"index"`
+	SharedInboxGroup   SharedInboxGroup `json:"shared_inbox_group"`
+	TicketStatusId     uint             `json:"ticket_status_id"`
+	TicketStatus       TicketStatus     `json:"ticket_status"`
+	AssignedToId       uint             `json:"assigned_to_id"`
+	AssignedTo         User             `json:"assigned_to"`
 }
 
 type ArchivedTicket struct {
