@@ -76,6 +76,8 @@ type TicketGroup struct {
 	AssignedToId       uint             `json:"assigned_to_id"`
 	AssignedTo         User             `json:"assigned_to"`
 	Tickets            []Ticket         `json:"tickets"`
+	HighestPriorityId  uint             `json:"highest_priority_id"`
+	OldestTicketDate   time.Time        `json:"oldest_ticket_date"`
 }
 
 type ArchivedTicket struct {
