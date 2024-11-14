@@ -75,6 +75,7 @@ type TicketGroup struct {
 	TicketStatus       TicketStatus     `json:"ticket_status"`
 	AssignedToId       uint             `json:"assigned_to_id"`
 	AssignedTo         User             `json:"assigned_to"`
+	Tickets            []Ticket         `json:"tickets"`
 }
 
 type ArchivedTicket struct {
