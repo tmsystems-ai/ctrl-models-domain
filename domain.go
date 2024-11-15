@@ -246,21 +246,22 @@ type SigUserAllocation struct {
 }
 
 type User struct {
-	Id                   uint                `json:"id" gorm:"primaryKey"`
-	FirstName            string              `json:"first_name" gorm:"size:255"`
-	LastName             string              `json:"last_name" gorm:"size:255"`
-	EmployeeId           uint                `json:"employee_id"`
-	RoleId               uint                `json:"role_id"`
-	Role                 Role                `json:"role" gorm:"foreignKey:RoleId;references:Id"`
-	Password             string              `json:"password" gorm:"size:255"`
-	Email                string              `json:"email" gorm:"size:255"`
-	PhoneNumber          string              `json:"phone_number" gorm:"size:255"`
-	Tickets              []Ticket            `json:"tickets" gorm:"foreignKey:AssignedToId;references:Id"`
-	SigUserAllocations   []SigUserAllocation `json:"sig_user_allocations" gorm:"foreignKey:UserId;references:Id"`
-	ProfilePictureURI    string              `json:"profile_picture_uri" gorm:"size:2048"`
-	Country              string              `json:"country" gorm:"size:255"`
-	RequirePasswordReset bool                `json:"require_password_reset"`
-	UserPreferences      []UserPreference    `json:"user_preferences" gorm:"foreignKey:UserId;references:Id"`
+	Id                    uint                   `json:"id" gorm:"primaryKey"`
+	FirstName             string                 `json:"first_name" gorm:"size:255"`
+	LastName              string                 `json:"last_name" gorm:"size:255"`
+	EmployeeId            uint                   `json:"employee_id"`
+	RoleId                uint                   `json:"role_id"`
+	Role                  Role                   `json:"role" gorm:"foreignKey:RoleId;references:Id"`
+	Password              string                 `json:"password" gorm:"size:255"`
+	Email                 string                 `json:"email" gorm:"size:255"`
+	PhoneNumber           string                 `json:"phone_number" gorm:"size:255"`
+	Tickets               []Ticket               `json:"tickets" gorm:"foreignKey:AssignedToId;references:Id"`
+	SigUserAllocations    []SigUserAllocation    `json:"sig_user_allocations" gorm:"foreignKey:UserId;references:Id"`
+	ProfilePictureURI     string                 `json:"profile_picture_uri" gorm:"size:2048"`
+	Country               string                 `json:"country" gorm:"size:255"`
+	RequirePasswordReset  bool                   `json:"require_password_reset"`
+	UserPreferences       []UserPreference       `json:"user_preferences" gorm:"foreignKey:UserId;references:Id"`
+	UserComponentSettings []UserComponentSetting `json:"user_component_settings" gorm:"foreignKey:UserId;references:Id"`
 }
 
 type UserPreference struct {
@@ -269,6 +270,20 @@ type UserPreference struct {
 	Type   string `json:"type" gorm:"size:255;index"`
 	Value  string `json:"value" gorm:"size:255"`
 	Key    string `json:"key" gorm:"size:255;index"`
+}
+
+type ComponentSetting struct {
+	Id                    uint                   `json:"id" gorm:"primaryKey"`
+	Name                  string                 `json:"name" gorm:"size:255"`
+	UserComponentSettings []UserComponentSetting `json:"user_component_settings" gorm:"foreignKey:ComponentSettingId;references:Id"`
+}
+
+type UserComponentSetting struct {
+	UserId             uint             `json:"user_id"`
+	User               User             `json:"user" gorm:"foreignKey:UserId;references:Id"`
+	ComponentSettingId uint             `json:"component_setting_id"`
+	ComponentSetting   ComponentSetting `json:"component_setting" gorm:"foreignKey:ComponentSettingId;references:Id"`
+	IsEnabled          bool             `json:"is_enabled"`
 }
 
 type TicketStatus struct {
