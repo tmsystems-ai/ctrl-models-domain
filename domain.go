@@ -158,6 +158,8 @@ type Email struct {
 	RetryCounter          int               `json:"retry_counter" gorm:"default:0"`
 	DeletedFromM365       bool              `json:"deleted_from_m365" gorm:"default:false"`
 	DeletedFromM365Date   *time.Time        `json:"deleted_from_m365_date" gorm:"default:null"`
+	CreatedById           *uint             `json:"created_by_id"`
+	CreatedBy             *User             `json:"created_by" gorm:"foreignKey:CreatedById;references:Id"`
 }
 
 type EmailTemplate struct {
