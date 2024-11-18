@@ -245,6 +245,7 @@ type SigUserAllocation struct {
 	UserId             uint             `json:"user_id"`
 	User               User             `json:"user" gorm:"foreignKey:UserId;references:Id"`
 	IsEnabled          bool             `json:"is_enabled"`
+	Order              int              `json:"order"`
 }
 
 type User struct {
