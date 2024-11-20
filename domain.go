@@ -141,6 +141,8 @@ type Email struct {
 	SubjectLine           string            `json:"subject_line" gorm:"type:text"`
 	Body                  string            `json:"body" gorm:"type:mediumtext"`
 	To                    string            `json:"to" gorm:"type:text"`
+	CC                    string            `json:"cc" gorm:"type:text"`
+	BCC                   string            `json:"bcc" gorm:"type:text"`
 	From                  string            `json:"from" gorm:"type:text"`
 	URI                   string            `json:"uri" gorm:"size:2048"`
 	EmailAttachments      []EmailAttachment `json:"email_attachments" gorm:"foreignKey:EmailId;references:Id"`
