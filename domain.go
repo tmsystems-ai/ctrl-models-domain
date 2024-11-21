@@ -62,7 +62,6 @@ type Ticket struct {
 	CompletedDate   *time.Time    `json:"completed_date,omitempty"`
 	CustomerId      *uint         `json:"customer_id"`
 	Customer        Customer      `json:"customer" gorm:"foreignKey:CustomerId;references:Id"`
-	GroupTicketIds  []uint        `json:"group_ticket_ids"`
 	TicketGroupId   *uint         `json:"ticket_group_id" gorm:"index"`
 	TicketGroup     *TicketGroup  `json:"ticket_group" gorm:"foreignKey:TicketGroupId;references:Id"`
 }
