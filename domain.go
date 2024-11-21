@@ -70,7 +70,7 @@ type TicketGroup struct {
 	Id                 uint      `json:"id" gorm:"primaryKey"`
 	Name               string    `json:"name" gorm:"size:255"`
 	SharedInboxGroupId uint      `json:"shared_inbox_group_id" gorm:"index"`
-	TicketIds          []uint    `json:"ticket_ids"`
+	TicketIds          []uint    `json:"ticket_ids" gorm:"serializer:json"`
 	HighestPriorityId  uint      `json:"highest_priority_id"`
 	OldestTicketDate   time.Time `json:"oldest_ticket_date"`
 }
