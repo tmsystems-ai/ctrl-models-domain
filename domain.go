@@ -250,8 +250,9 @@ type User struct {
 	FirstName             string                 `json:"first_name" gorm:"size:255"`
 	LastName              string                 `json:"last_name" gorm:"size:255"`
 	EmployeeId            uint                   `json:"employee_id"`
-	RoleId                uint                   `json:"role_id"`
-	Role                  Role                   `json:"role" gorm:"foreignKey:RoleId;references:Id"`
+	Roles                 []Role                 `json:"roles"`           // Role objects
+	CurrentRoleId         uint                   `json:"current_role_id"` // Currently active role
+	DefaultRoleId         uint                   `json:"default_role_id"` // Default role (first in array)
 	Password              string                 `json:"password" gorm:"size:255"`
 	Email                 string                 `json:"email" gorm:"size:255"`
 	PhoneNumber           string                 `json:"phone_number" gorm:"size:255"`
