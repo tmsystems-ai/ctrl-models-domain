@@ -70,6 +70,7 @@ type TicketGroup struct {
 	Id                 uint      `json:"id" gorm:"primaryKey"`
 	Name               string    `json:"name" gorm:"size:255"`
 	SharedInboxGroupId uint      `json:"shared_inbox_group_id" gorm:"index"`
+	Tickets            []Ticket  `json:"tickets" gorm:"foreignKey:TicketGroupId"` // Add this line
 	HighestPriorityId  uint      `json:"highest_priority_id"`
 	OldestTicketDate   time.Time `json:"oldest_ticket_date"`
 }
