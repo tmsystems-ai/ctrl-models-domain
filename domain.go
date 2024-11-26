@@ -70,6 +70,7 @@ type TicketGroup struct {
 	Id                 uint      `json:"id" gorm:"primaryKey"`
 	Name               string    `json:"name" gorm:"size:255"`
 	SharedInboxGroupId uint      `json:"shared_inbox_group_id" gorm:"index"`
+	Tickets            []Ticket  `json:"tickets" gorm:"foreignKey:TicketGroupId"` // Add this line
 	HighestPriorityId  uint      `json:"highest_priority_id"`
 	OldestTicketDate   time.Time `json:"oldest_ticket_date"`
 }
@@ -242,6 +243,8 @@ type SigUserAllocation struct {
 	User               User             `json:"user" gorm:"foreignKey:UserId;references:Id"`
 	IsEnabled          bool             `json:"is_enabled"`
 	Order              int              `json:"order"`
+	RoleId             uint             `json:"role_id"`
+	Role               Role             `json:"role" gorm:"foreignKey:RoleId;references:Id"`
 }
 
 type User struct {
@@ -251,7 +254,7 @@ type User struct {
 	EmployeeId            uint                   `json:"employee_id"`
 	RoleId                uint                   `json:"role_id"`
 	Role                  Role                   `json:"role" gorm:"foreignKey:RoleId;references:Id"`
-	Password              *string                `json:"password" gorm:"size:255"`
+	Password              string                 `json:"password" gorm:"size:255"`
 	Email                 string                 `json:"email" gorm:"size:255"`
 	PhoneNumber           string                 `json:"phone_number" gorm:"size:255"`
 	Tickets               []Ticket               `json:"tickets" gorm:"foreignKey:AssignedToId;references:Id"`
