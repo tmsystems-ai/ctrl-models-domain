@@ -251,7 +251,7 @@ type User struct {
 	EmployeeId            uint                   `json:"employee_id"`
 	RoleId                uint                   `json:"role_id"`
 	Role                  Role                   `json:"role" gorm:"foreignKey:RoleId;references:Id"`
-	Password              string                 `json:"password" gorm:"size:255"`
+	Password              *string                `json:"password" gorm:"size:255"`
 	Email                 string                 `json:"email" gorm:"size:255"`
 	PhoneNumber           string                 `json:"phone_number" gorm:"size:255"`
 	Tickets               []Ticket               `json:"tickets" gorm:"foreignKey:AssignedToId;references:Id"`
@@ -261,6 +261,8 @@ type User struct {
 	RequirePasswordReset  bool                   `json:"require_password_reset"`
 	UserPreferences       []UserPreference       `json:"user_preferences" gorm:"foreignKey:UserId;references:Id"`
 	UserComponentSettings []UserComponentSetting `json:"user_component_settings" gorm:"foreignKey:UserId;references:Id"`
+	IsAdditionalProfile   bool                   `json:"is_additional_profile" gorm:"default:false"`
+	RootUserId            *uint                  `json:"root_user_id"`
 }
 
 type UserPreference struct {
