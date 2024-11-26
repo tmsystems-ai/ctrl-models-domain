@@ -254,7 +254,7 @@ type User struct {
 	EmployeeId            uint                   `json:"employee_id"`
 	RoleId                uint                   `json:"role_id"`
 	Role                  Role                   `json:"role" gorm:"foreignKey:RoleId;references:Id"`
-	Password              string                 `json:"password" gorm:"size:255"`
+	Password              *string                `json:"password" gorm:"size:255"`
 	Email                 string                 `json:"email" gorm:"size:255"`
 	PhoneNumber           string                 `json:"phone_number" gorm:"size:255"`
 	Tickets               []Ticket               `json:"tickets" gorm:"foreignKey:AssignedToId;references:Id"`
