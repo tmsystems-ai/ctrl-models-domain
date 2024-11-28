@@ -131,6 +131,7 @@ type ArchivedEmailThread struct {
 	OriginalID          uint      `gorm:"column:original_id"`
 	ArchivedDate        time.Time `gorm:"column:archived_date;default:CURRENT_TIMESTAMP(3)"`
 }
+
 type Email struct {
 	Id                    uint              `json:"id" gorm:"primaryKey"`
 	SubjectLine           string            `json:"subject_line" gorm:"type:text"`
