@@ -167,6 +167,13 @@ type EmailTemplate struct {
 	Body          string    `json:"body" gorm:"type:text"`
 }
 
+type SystemEmailTemplate struct {
+	Id      uint   `json:"id" gorm:"primaryKey"`
+	Key     string `json:"key" gorm:"size:255"`
+	Subject string `json:"subject" gorm:"size:255"`
+	Body    string `json:"body" gorm:"type:text"`
+}
+
 type EmailThread struct {
 	Id                  uint             `json:"id" gorm:"primaryKey"`
 	ReceivedFrom        string           `json:"received_from" gorm:"size:255"`
@@ -266,6 +273,7 @@ type User struct {
 	UserComponentSettings []UserComponentSetting `json:"user_component_settings" gorm:"foreignKey:UserId;references:Id"`
 	IsAdditionalProfile   bool                   `json:"is_additional_profile" gorm:"default:false"`
 	RootUserId            *uint                  `json:"root_user_id"`
+	OTPEnabled            bool                   `json:"otp_enabled" gorm:"default:true"`
 }
 
 type UserPreference struct {
@@ -274,6 +282,15 @@ type UserPreference struct {
 	Type   string `json:"type" gorm:"size:255;index"`
 	Value  string `json:"value" gorm:"size:255"`
 	Key    string `json:"key" gorm:"size:255;index"`
+}
+
+type OTPCode struct {
+	Id           uint      `json:"id" gorm:"primaryKey"`
+	UserID       uint      `json:"user_id" gorm:"index"`
+	Code         string    `json:"code" gorm:"size:255"`
+	ExpiresAt    time.Time `json:"expires_at"`
+	CreatedAt    time.Time `json:"created_at"`
+	SessionToken string    `json:"session_token" gorm:"size:255;index"`
 }
 
 type ComponentSetting struct {
@@ -340,6 +357,10 @@ func (ArchivedEmail) TableName() string {
 
 func (ArchivedEmailThread) TableName() string {
 	return "archived_email_thread"
+}
+
+func (OTPCode) TableName() string {
+	return "otp_codes"
 }
 
 type AuthToken struct {
