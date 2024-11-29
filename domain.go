@@ -275,6 +275,7 @@ type User struct {
 	IsAdditionalProfile   bool                   `json:"is_additional_profile" gorm:"default:false"`
 	RootUserId            *uint                  `json:"root_user_id"`
 	OTPEnabled            bool                   `json:"otp_enabled" gorm:"default:true"`
+	EnforceMicrosoftLogin bool                   `json:"enforce_microsoft_login" gorm:"default:false"`
 }
 
 type UserPreference struct {
