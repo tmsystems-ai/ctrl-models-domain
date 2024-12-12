@@ -158,6 +158,7 @@ type Email struct {
 	DeletedFromM365Date   *time.Time        `json:"deleted_from_m365_date" gorm:"default:null"`
 	CreatedById           *uint             `json:"created_by_id"`
 	CreatedBy             *User             `json:"created_by" gorm:"foreignKey:CreatedById;references:Id"`
+	IsDuplicate           bool              `json:"is_duplicate" gorm:"default:false"`
 }
 
 type EmailTemplate struct {
