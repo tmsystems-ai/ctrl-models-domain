@@ -159,6 +159,8 @@ type Email struct {
 	CreatedById           *uint             `json:"created_by_id"`
 	CreatedBy             *User             `json:"created_by" gorm:"foreignKey:CreatedById;references:Id"`
 	IsDuplicate           bool              `json:"is_duplicate" gorm:"default:false"`
+	References            string            `json:"references" gorm:"type:text"`
+	InReplyTo             string            `json:"in_reply_to" gorm:"type:text"`
 }
 
 type EmailTemplate struct {
