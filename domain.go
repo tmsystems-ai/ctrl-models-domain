@@ -161,7 +161,7 @@ type Email struct {
 	IsDuplicate           bool              `json:"is_duplicate" gorm:"default:false"`
 	References            string            `json:"references" gorm:"type:text"`
 	InReplyTo             string            `json:"in_reply_to" gorm:"type:text"`
-	InternetMessageId     string            `json:"internet_provider_message_id" gorm:"size:550;index"`
+	InternetMessageId     string            `json:"internet_provider_message_id" gorm:"column:internet_message_id;size:550;index"`
 }
 
 type EmailTemplate struct {
