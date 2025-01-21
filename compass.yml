@@ -1,0 +1,18 @@
+name: ctrl-models-domain
+id: ari:cloud:compass:18b6012f-23b6-4c4b-a8a9-6df63656605c:component/937e54b7-98f6-43a7-a2af-eb1bc31ce99e/ea66b24c-46e4-441d-891e-507fd66f2a38
+description: null
+configVersion: 1
+typeId: SERVICE
+ownerId: null
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/tmsystems-ai/ctrl-models-domain
+relationships:
+  DEPENDS_ON: []
+labels:
+  - language:go
+  - source:github
+customFields: null
