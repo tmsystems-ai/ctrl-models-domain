@@ -157,7 +157,7 @@ type Email struct {
 	DeletedFromM365       bool              `json:"deleted_from_m365" gorm:"default:false"`
 	DeletedFromM365Date   *time.Time        `json:"deleted_from_m365_date" gorm:"default:null"`
 	CreatedById           *uint             `json:"created_by_id"`
-	CreatedBy             *User             `json:"created_by" gorm:"foreignKey:CreatedById;references:Id"`
+	CreatedBy             *User             `json:"created_by" gorm:"foreignKey:CreatedById;references:Id;constraint:OnDelete:SET NULL,OnUpdate:CASCADE;foreignKey:email_created_by_fk"`
 	IsDuplicate           bool              `json:"is_duplicate" gorm:"default:false"`
 	References            string            `json:"references" gorm:"type:text"`
 	InReplyTo             string            `json:"in_reply_to" gorm:"type:text"`
