@@ -349,6 +349,11 @@ type Notification struct {
 	NotificationTime time.Time `json:"notification_time"`
 }
 
+type EmailAddressToSkip struct {
+	Id           uint   `json:"id" gorm:"primaryKey"`
+	EmailAddress string `json:"email_address" gorm:"size:255"`
+}
+
 type SystemSetting struct {
 	Key   string `gorm:"column:key;primaryKey"`
 	Value string
