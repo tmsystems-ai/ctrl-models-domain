@@ -76,27 +76,47 @@ type TicketGroup struct {
 }
 
 type ArchivedTicket struct {
-	ID                             uint64         `json:"id" gorm:"primaryKey"`
-	OriginalID                     uint64         `json:"original_id"`
-	CreatedDate                    time.Time      `json:"created_date"`
-	ReceivedDate                   time.Time      `json:"received_date"`
-	EmailThreadID                  uint64         `json:"email_thread_id"`
-	EmailThreadSubject             string         `json:"email_thread_subject"`
-	EmailThreadReceivedFrom        string         `json:"email_thread_received_from"`
-	EmailThreadProviderThreadID    string         `json:"email_thread_provider_thread_id"`
-	EmailThreadProviderThreadTopic string         `json:"email_thread_provider_thread_topic"`
-	CreatedByID                    *uint64        `json:"created_by_id"`
-	TicketStatusID                 uint64         `json:"ticket_status_id"`
-	AssignedToID                   *uint64        `json:"assigned_to_id"`
-	PriorityLevelID                uint64         `json:"priority_level_id"`
-	CompletedDate                  *time.Time     `json:"completed_date"`
-	CustomerID                     *uint64        `json:"customer_id"`
-	ArchivedDate                   time.Time      `json:"archived_date"`
-	Emails                         datatypes.JSON `json:"emails"`
-	EmailAttachments               datatypes.JSON `json:"email_attachments"`
-	SharedInboxGroupID             uint64         `json:"shared_inbox_group_id"`
-	InboxGroupName                 string         `json:"inbox_group_name"`
-	MailboxEmailAddress            string         `json:"mailbox_email_address"`
+	ID                             uint64    `json:"id" gorm:"primaryKey"`
+	OriginalID                     uint64    `json:"original_id"`
+	CreatedDate                    time.Time `json:"created_date"`
+	ReceivedDate                   time.Time `json:"received_date"`
+	EmailThreadID                  uint64    `json:"email_thread_id"`
+	EmailThreadSubject             string    `json:"email_thread_subject"`
+	EmailThreadReceivedFrom        string    `json:"email_thread_received_from"`
+	EmailThreadProviderThreadID    string    `json:"email_thread_provider_thread_id"`
+	EmailThreadProviderThreadTopic string    `json:"email_thread_provider_thread_topic"`
+
+	// Relationship: ArchivedTicket.CreatedBy -> users.id
+	CreatedByID *uint64 `json:"created_by_id"`
+	CreatedBy   *User   `json:"created_by" gorm:"foreignKey:CreatedByID;references:Id"`
+
+	// Relationship: ArchivedTicket.TicketStatus -> ticket_statuses.id
+	TicketStatusID uint64       `json:"ticket_status_id"`
+	TicketStatus   TicketStatus `json:"ticket_status" gorm:"foreignKey:TicketStatusID;references:Id"`
+
+	// Relationship: ArchivedTicket.AssignedTo -> users.id
+	AssignedToID *uint64 `json:"assigned_to_id"`
+	AssignedTo   *User   `json:"assigned_to" gorm:"foreignKey:AssignedToID;references:Id"`
+
+	// Relationship: ArchivedTicket.PriorityLevel -> priority_levels.id
+	PriorityLevelID uint64        `json:"priority_level_id"`
+	PriorityLevel   PriorityLevel `json:"priority_level" gorm:"foreignKey:PriorityLevelID;references:Id"`
+
+	CompletedDate    *time.Time     `json:"completed_date"`
+	CustomerID       *uint64        `json:"customer_id"`
+	ArchivedDate     time.Time      `json:"archived_date"`
+	Emails           datatypes.JSON `json:"emails"`
+	EmailAttachments datatypes.JSON `json:"email_attachments"`
+
+	// Relationship: ArchivedTicket.Customer -> customers.id
+	Customer *Customer `json:"customer" gorm:"foreignKey:CustomerID;references:Id"`
+
+	SharedInboxGroupID  uint64 `json:"shared_inbox_group_id"`
+	InboxGroupName      string `json:"inbox_group_name"`
+	MailboxEmailAddress string `json:"mailbox_email_address"`
+
+	// Relationship: ArchivedTicket.SharedInboxGroup -> shared_inbox_groups.id
+	SharedInboxGroup SharedInboxGroup `json:"shared_inbox_group" gorm:"foreignKey:SharedInboxGroupID;references:Id"`
 }
 
 type ArchivedEmail struct {
