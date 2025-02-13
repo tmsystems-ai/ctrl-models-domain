@@ -65,6 +65,7 @@ type Ticket struct {
 	TicketGroupId   *uint         `json:"ticket_group_id" gorm:"index"`
 	TicketGroup     *TicketGroup  `json:"ticket_group" gorm:"foreignKey:TicketGroupId;references:Id"`
 }
+
 type AssignableUserOrder struct {
 	UserID             uint      `json:"user_id" gorm:"primaryKey"` // Composite primary key for user id and shared inbox group id
 	SharedInboxGroupID uint      `json:"shared_inbox_group_id" gorm:"primaryKey"`
