@@ -289,6 +289,16 @@ type User struct {
 	EnforceMicrosoftLogin bool                   `json:"enforce_microsoft_login" gorm:"default:false"`
 }
 
+type AddressBook struct {
+	Id          uint      `json:"id" gorm:"primaryKey"`
+	UserId      uint      `json:"user_id" gorm:"index"`
+	User        User      `json:"user" gorm:"foreignKey:UserId;references:Id"`
+	Name        string    `json:"name"`
+	Email       string    `json:"email"`
+	CreatedDate time.Time `json:"created_date"`
+	UpdatedDate time.Time `json:"updated_date"`
+}
+
 type UserPreference struct {
 	Id     uint   `json:"id" gorm:"primaryKey"`
 	UserId *uint  `json:"user_id" gorm:"index"`
