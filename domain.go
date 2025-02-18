@@ -65,6 +65,17 @@ type Ticket struct {
 	TicketGroupId   *uint         `json:"ticket_group_id" gorm:"index"`
 	TicketGroup     *TicketGroup  `json:"ticket_group" gorm:"foreignKey:TicketGroupId;references:Id"`
 }
+
+// TicketHistory logs all ticket changes.
+type TicketHistory struct {
+	ID         uint           `json:"id" gorm:"primaryKey"`
+	TicketID   uint           `json:"ticket_id"`   // Which ticket changed
+	ActionType string         `json:"action_type"` // e.g., "UPDATE", "DELETE"
+	ChangedAt  time.Time      `json:"changed_at"`  // Timestamp of change
+	ChangedBy  string         `json:"changed_by"`  // Username or "SYSTEM"
+	OldValues  datatypes.JSON `json:"old_values"`  // Snapshot before change
+	NewValues  datatypes.JSON `json:"new_values"`  // Snapshot after change (null for delete)
+}
 type AssignableUserOrder struct {
 	UserID             uint      `json:"user_id" gorm:"primaryKey"` // Composite primary key for user id and shared inbox group id
 	SharedInboxGroupID uint      `json:"shared_inbox_group_id" gorm:"primaryKey"`
