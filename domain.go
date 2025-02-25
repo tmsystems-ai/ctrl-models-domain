@@ -119,13 +119,13 @@ type ArchivedTicket struct {
 
 type ArchivedEmail struct {
 	ID                    uint64                    `json:"id" gorm:"primaryKey"`
-	SubjectLine           string                    `json:"subject_line"`
+	SubjectLine           string                    `json:"subject_line" gorm:"index"`
 	Body                  string                    `json:"body"`
 	To                    string                    `json:"to"`
 	From                  string                    `json:"from"`
 	URI                   string                    `json:"uri"`
 	ReceivedDate          time.Time                 `json:"received_date"`
-	MailProviderMessageID string                    `json:"mail_provider_message_id"`
+	MailProviderMessageID string                    `json:"mail_provider_message_id" gorm:"index"`
 	Attachments           []ArchivedEmailAttachment `json:"attachments" gorm:"foreignKey:EmailID"`
 	GCSFolder             string                    `json:"gcs_folder"`
 }
