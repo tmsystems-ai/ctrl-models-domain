@@ -328,7 +328,7 @@ type UserPreference struct {
 	UserId *uint  `json:"user_id" gorm:"index"`
 	Type   string `json:"type" gorm:"size:255;index"`
 	Value  string `json:"value" gorm:"type:text"`
-	Key    string `json:"key" gorm:"type:text;index"`
+	Key    string `json:"key" gorm:"size:255;index"`
 }
 
 type OTPCode struct {
