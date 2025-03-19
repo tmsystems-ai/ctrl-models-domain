@@ -422,3 +422,19 @@ type AuthToken struct {
 	ExpiresAt time.Time `gorm:"precision:1" json:"expires_at"`
 	CreatedAt time.Time `gorm:"precision:1" json:"created_at"`
 }
+
+// PaymentReference represents a record of a payment email for tracking duplicates
+type PaymentReference struct {
+	Id            uint      `json:"id" gorm:"primaryKey"`
+	EmailId       uint      `json:"email_id" gorm:"index"`
+	ThreadId      uint      `json:"thread_id" gorm:"index"`
+	TicketId      uint      `json:"ticket_id" gorm:"index"`
+	InsuredName   string    `json:"insured_name" gorm:"index;size:255"`
+	AgencyName    string    `json:"agency_name" gorm:"size:255"`
+	PaymentAmount string    `json:"payment_amount" gorm:"size:50"`
+	CreatedAt     time.Time `json:"created_at"`
+}
+
+func (PaymentReference) TableName() string {
+	return "payment_references"
+}
