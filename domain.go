@@ -131,6 +131,7 @@ type ArchivedTicket struct {
 
 type ArchivedEmail struct {
 	ID                    uint64                    `json:"id" gorm:"primaryKey"`
+	OriginalEmailID       uint64                    `json:"original_email_id" gorm:"column:email_id;index"`
 	SubjectLine           string                    `json:"subject_line" gorm:"size:750;index"`
 	Body                  string                    `json:"body"`
 	To                    string                    `json:"to"`
