@@ -139,7 +139,7 @@ type ArchivedEmail struct {
 	URI                   string                    `json:"uri"`
 	ReceivedDate          time.Time                 `json:"received_date"`
 	MailProviderMessageID string                    `json:"mail_provider_message_id" gorm:"index"`
-	Attachments           []ArchivedEmailAttachment `json:"attachments" gorm:"foreignKey:EmailID"`
+	Attachments           []ArchivedEmailAttachment `json:"attachments" gorm:"foreignKey:EmailID;references:OriginalEmailID"`
 	GCSFolder             string                    `json:"gcs_folder"`
 	SadHash               string                    `json:"sad_hash" gorm:"size:64;index"`
 	InternetMessageId     string                    `json:"internet_provider_message_id" gorm:"column:internet_message_id;size:550;index"`
