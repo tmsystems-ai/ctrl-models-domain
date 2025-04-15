@@ -141,6 +141,7 @@ type ArchivedEmail struct {
 	MailProviderMessageID string                    `json:"mail_provider_message_id" gorm:"index"`
 	Attachments           []ArchivedEmailAttachment `json:"attachments" gorm:"foreignKey:EmailID"`
 	GCSFolder             string                    `json:"gcs_folder"`
+	SadHash               string                    `json:"sad_hash" gorm:"size:64;index"`
 	InternetMessageId     string                    `json:"internet_provider_message_id" gorm:"column:internet_message_id;size:550;index"`
 	OriginalEmailThreadId uint                      `gorm:"column:original_email_thread_id"`
 }
