@@ -344,6 +344,16 @@ type OTPCode struct {
 	SessionToken string    `json:"session_token" gorm:"size:255;index"`
 }
 
+// OTPLock tracks failed OTP attempts and lockout status
+type OTPLock struct {
+	ID             uint       `json:"id" gorm:"primarykey"`
+	UserID         uint       `json:"user_id" gorm:"index"`
+	FailedAttempts int        `json:"failed_attempts" gorm:"default:0"`
+	LockedUntil    *time.Time `json:"locked_until"`
+	CreatedAt      time.Time  `json:"created_at"`
+	UpdatedAt      time.Time  `json:"updated_at"`
+}
+
 type ComponentSetting struct {
 	Id                    uint                   `json:"id" gorm:"primaryKey"`
 	Name                  string                 `json:"name" gorm:"size:255"`
